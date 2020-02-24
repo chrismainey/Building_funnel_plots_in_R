@@ -1,0 +1,166 @@
+---
+title: "Introduction to R"
+author: "Chris Mainey chris.mainey@uhb.nhs.uk"
+date: "2018/01/28 (updated: `r Sys.Date()`)"
+output:
+  xaringan::moon_reader:
+    chakra: libs/remark-latest.min.js
+    css: "libs/HED.css"
+    lib_dir: libs
+    seal: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+class: middle
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.width=10, fig.height=6, fig.align = "center", 
+                      dev.args = list(png = list(type = "cairo")), fig.retina=3) 
+
+library(Cairo)
+```
+
+
+
+.pull-left[
+__Chris Mainey__ 
+<br>
+Senior Statistical Intelligence Analyst 
+<br>
+Healthcare Evaluation Data (HED) 
+<br>
+Univeristy Hospitals Birmingham NHS FT 
+<br><br>
+www.hed.nhs.uk
+]
+
+.pull-right[
+<img src="https://github.com/chrismainey/FunnelPlotR/raw/master/man/figures/logo.png" width=300>
+]
+
+---
+
+#  Overview 
+
++ Standardised Mortality Ratios
++ Cross-sectional Comparisons: Funnel Plots
++ Longitudinal Comparisons: CUSUMs
++ Code examples on GitHub:
+	+ https://github.com/chrismainey/RSS_2019_FunnelPlot_CUSUMs
+[https://github.com/chrismainey/RSS_2019_FunnelPlot_CUSUMs](https://github.com/chrismainey/RSS_2019_FunnelPlot_CUSUMs)
+
+---
+#  Mortality measurement 
+
+
+
+---
+#  Mortality Monitoring 
+
++ Mortality is an ?outcome? measure
++ ?Smoke alarms? related to quality of care (Keogh,2013)
++ Confused with being a quality metric
+	+ Not clearly linked with poor care (Lilford et al, 2004)
+	+ Low signal-to-noise ratio (Lilford & Pronovost, 2010) 
+	+ Poor proxy of avoidable deaths (Girling et al, 2017)
++ Susceptible to various biases (Mohammed et al ,2012)
+
+---
+#  Standardisation 
+
++ Crude rates useful in a stable system
++ ?Case-mix? differs between hospitals and over time
++ Two common ways to adjust for this:
+	+ **Direct Standardisation** (adjust all to common standard and compare)
+	+ **Indirect Standardisation** (adjust all to compare to average expected rate)
+
+---
+#  Common Methods 
+
++ Hospital Standardised Mortality Ratio (HSMR) (Jarman et al, 1999)
+	+ Conditions accounting for ~80% in-hospital deaths
+	+ Extensive case-mix adjustment
++ Summary Hospital-Level Mortality Index (SHMI) (Campbell et al, 2012)
+	+ All deaths in hospital or within 30 days of discharge
+	+ All admissions (excl. still birth)
+	+ Fewer case-mix factors than HSMR
++ Both create stratified logistic regression models, per diagnostic group.
++ Models used to predict probability of death per-patient
+
+---
+#  Standardised Ratio 
+
++ 10 identical patients:
+	+ Risk factor of model
+	+ E.g. age, sex, primary diagnosis etc.
++ If these patients had a probability of death of 0.3 (30%)
+	+ Expected deaths = 10 * 0.3 = 3
++ If we then observed 4 deaths:
++ >1 = ?higher than expected?
++ <1 = ?lower than expected?
+
+---
+#  Visualising Uncertainty in SMRs 
+
++ Confidence intervals
++ Process control theory:
+	+ Control limits
+	+ ?Special-cause? variation
++ Funnel plots (Speigelhalter, 2005a)
+	+ Plot measure of size (expected) on x-axis
+	+ SMR on the y-axis
+![](assets/img/image8.png)
+
+---
+#  Issues with Funnel Plots 
+
++ Are we asking the right question?
++ Implicit ranking
++ Which limits do we use?
++ Overdispersion
+	+ Assumed to be clustering
+	+ Adjustment proposed (Spiegelhalter, 2005b)
+	+ Alternative used by NHSD  (plotted right)
++ Strictly cross-sectional
+![](assets/img/image9.png)
+
+
+---
+#  Quick R plug? 
+
++ FunnelPlotR <U+0001F4E6>
+	+ is now available on CRAN:
++ https://chrismainey.github.io/FunnelPlotR/
++ https://github.com/chrismainey/FunnelPlotR
++ Contributions and bug reports welcome!
+![](assets/img/image15.png)
+[https://chrismainey.github.io/FunnelPlotR/](https://github.com/chrismainey/FunnelPlotR)
+[https://github.com/chrismainey/FunnelPlotR](https://chrismainey.github.io/FunnelPlotR/)
+
+---
+#  Thank you for your time! 
+
++ Questions?
+
+---
+#  References 
+
++ BOTTLE, A. & AYLIN, P. 2011. Predicting the false alarm rate in multi-institution mortality monitoring. *The Journal of the Operational Research Society,* 62 **,** 1711-1718.
++ CAMPBELL, M.J., JACQUES, R.M., FOTHERINGHAM, J., MAHESWARAN, R. and NICHOLL, J., 2012. Developing a summary hospital mortality index: retrospective analysis in English hospitals over five years. *BMJ,* **344** , pp. e1001
++ GRIGG, A.O., SPEGELHALTER, D.J., 2008 An Empirical Approximation to the Null Unbounded Steady-State Distribution of the Cumulative Sum Statistic. *Technometrics* . **50** (4), pp501 ? 511
++ JARMAN, B., GAULT, S., ALVES, B., HIDER, A., DOLAN, S., COOK, A., HURWITZ, B. and IEZZONI, L.I., 1999. Explaining differences in English hospital death rates using routinely collected data. *BMJ,* **318** (7197), pp. 1515-1520.
++ KEOGH, B. 2013. *Keogh review on hospital deaths published - NHSUK* [Online]. Department of Health. Available: https://www.nhs.uk/NHSEngland/bruce-keogh-review/Documents/outcomes/keogh-review-final-report.pdf [Accessed 13/11/2017 2017].
++ LILFORD, R. and PRONOVOST, P., 2010. Using hospital mortality rates to judge hospital performance: a bad idea that just won't go away. *BMJ,* **340** , pp. c2016.
++ LILFORD, R., MOHAMMED, M.A., SPIEGELHALTER, D. and THOMSON, R., 2004. Use and misuse of process and outcome data in managing performance of acute medical care: avoiding institutional stigma. *The Lancet,* **363** (9415), pp. 1147-1154.
++ MOHAMMED, M.A., DEEKS, J.J., GIRLING, A., RUDGE, G., CARMALT, M., STEVENS, A.J. and LILFORD, R.J., 2009. Evidence of methodological bias in hospital standardised mortality ratios: retrospective database study of English hospitals. *BMJ,* **338** , pp. b780.
++ PITCHES, D., MOHAMMED, M. and LILFORD, R., 2007. What is the empirical evidence that hospitals with higher-risk adjusted mortality rates provide poorer quality care? A systematic review of the literature. BMC Health Serv Res, 7(1), pp. 91.
++ SPIEGELHALTER, D., GRIGG, O., KiINSMAN, R., FAREWELL, V., T., TREASURE, T., Risk-adjusted sequential probability ratio tests: applications to Bristol, Shipman, and adult cardiac surgery. I *Int J Qual Health Care;* **15** , pp 7-13
++ SPIEGELHALTER, D.J., 2005a. Funnel plots for comparing institutional performance. *Stat Med,* **24** (8), pp. 1185-1202.
++ SPIEGELHALTER, D.J., 2005b. Handling over-dispersion of performance indicators. *Qual Saf Health Care,* **14** (5), pp. 347-351
+[https://www.nhs.uk/NHSEngland/bruce-keogh-review/Documents/outcomes/keogh-review-final-report.pdf](https://www.nhs.uk/NHSEngland/bruce-keogh-review/Documents/outcomes/keogh-review-final-report.pdf)
+
+
+
