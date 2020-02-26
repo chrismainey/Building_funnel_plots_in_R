@@ -26,11 +26,33 @@ Healthcare Evaluation Data (HED)
 
 .small[Univeristy Hospitals Birmingham NHS FT]
 &lt;br&gt;&lt;br&gt;
-www.hed.nhs.uk
+[www.hed.nhs.uk](https://www.hed.nhs.uk)
 ]
 
 .pull-right[
 &lt;img src="https://github.com/chrismainey/FunnelPlotR/raw/master/man/figures/logo.png" width=300 fig.align="center"&gt;
+]
+
+---
+
+## Healthcare Evaluation Data (HED)
+
+
+&lt;a href="https://www.hed.nhs.uk"&gt;www.hed.nhs.uk &lt;/a&gt;
+
+
+.pull-left[
+- Online hospital benchmarking system
+- Statistical models and analysis tools
+- Activity, Mortality, Readmissions, Length-of-Stay, Marketshare etc.
+- Used by ~60 NHS and other organisations
+- Training and support
+&lt;br&gt;&lt;br&gt;
+- __Using national NHS HES data__
+]
+.pull-right[
+&lt;br&gt;
+&lt;img src="https://chrismainey.github.io/EARL_2019_presentation/assets/HED_system.png"&gt;
 ]
 
 ---
@@ -44,7 +66,7 @@ www.hed.nhs.uk
 --
 
 &lt;br&gt;&lt;br&gt;
-+ _If you are interested:_
++ _If you are interested (or if we have time):_
   + How to set up and build an R package
   + What I've learned from the process
   + How to publish it to CRAN
@@ -60,9 +82,10 @@ www.hed.nhs.uk
 + How do we compare between organisations with different patients?
 
 --
-
++ Direct standardisation:
+ + Adjust all to common standard (e.g. European Standard Popn)
 + Indirectly Standardised Ratios:
- + Predict an expected rate for each unit
+ + Predict an expected rate for each unit, based on average (regression model)
  + Case-mix adjustment
 
 $$ SR=\frac{\Sigma{(\text{observed deaths})}}{\Sigma{(\text{predicted deaths})}} $$
@@ -121,7 +144,7 @@ class: middle, center
 + Poisson distribution has fixed variance, mean and variance = `\(\mu\)`:
 
 `$$Pr(Y=y) = \frac{\mu^ye^{-\mu}}{y!}$$`
-__where:__: \mu$ is the expected average count or rate, 
+__where:__ `\(\mu\)` is the expected average count or rate, 
 + `\(e\)` is Euler’s number (the base of the natural logarithm: ~2.71828), 
 + and `\(y!\)` is the factorial of y.
 
@@ -155,7 +178,7 @@ Traditional regression model has single-intercept
 
 ---
 
-# Random intercepts
+# Random-intercepts
 
 
 &lt;img src="Building_funnel_plots_in_R_files/figure-html/rintplot2-1.png" width="792" style="display: block; margin: auto;" /&gt;
@@ -228,7 +251,6 @@ __Poisson limit__
 ```r
 library(FunnelPlotR)
 # lets use NHSD's SHMI dataset: https://digital.nhs.uk/data-and-information/publications/clinical-indicators/shmi/current/shmi-data
-
 SHMIdt &lt;- read.csv("Data/SHMI data at trust level, Oct18-Sep19 (csv).csv")
 SHMIdt$PROVIDER_NAME &lt;- factor(SHMIdt$PROVIDER_NAME)
 
@@ -250,7 +272,6 @@ __OD adjustment__
 ```r
 library(FunnelPlotR)
 # lets use NHSD's SHMI dataset: https://digital.nhs.uk/data-and-information/publications/clinical-indicators/shmi/current/shmi-data
-
 SHMIdt &lt;- read.csv("Data/SHMI data at trust level, Oct18-Sep19 (csv).csv")
 SHMIdt$PROVIDER_NAME &lt;- factor(SHMIdt$PROVIDER_NAME)
 
@@ -274,22 +295,39 @@ funnel_plot(numerator=SHMIdt$OBSERVED, denominator=SHMIdt$EXPECTED, group = SHMI
 + Overdispersion
 	+ Assumed to be clustering
 	+ Adjustment proposed (Spiegelhalter, 2005b)
-	+ Alternative used by NHSD  (plotted right)
+	+ Alternative used by NHSD  (with log/truncation)
 + Strictly cross-sectional
-![](assets/img/image9.png)
 
+&lt;br&gt;
+
+We could do it better with a mixed model!
 
 ---
-#  Quick R plug? 
+#  Quick R plug...
 
-+ FunnelPlotR &lt;U+0001F4E6&gt;
-	+ is now available on CRAN:
-+ https://chrismainey.github.io/FunnelPlotR/
-+ https://github.com/chrismainey/FunnelPlotR
-+ Contributions and bug reports welcome!
-![](assets/img/image15.png)
+.pull-left[
++ `FunnelPlotR` 📦
+	+ Available on CRAN.
+	+ Contributions and bug reports welcome!
+
+
 [https://chrismainey.github.io/FunnelPlotR/](https://github.com/chrismainey/FunnelPlotR)
 [https://github.com/chrismainey/FunnelPlotR](https://chrismainey.github.io/FunnelPlotR/)
+]
+
+.pull-right[
+&lt;img src="https://github.com/chrismainey/FunnelPlotR/raw/master/man/figures/logo.png" width=200 fig.align="center"&gt;
+]
+
+&lt;br&gt;
+
++ HED R Training:  [https://www.hed.nhs.uk/Info/hed-courses.aspx](https://www.hed.nhs.uk/Info/hed-courses.aspx)
+ + Intro to R
+ + Rmarkdown
+ + Regression modelling
+ + Machine Learning in R
+
+
 
 ---
 #  Thank you for your time! 
