@@ -40,7 +40,8 @@ Healthcare Evaluation Data (HED)
 ]
 
 .pull-right[
-<img src="https://github.com/chrismainey/FunnelPlotR/raw/master/man/figures/logo.png" width=300 fig.align="center">
+<img src="https://github.com/chrismainey/FunnelPlotR/raw/master/man/figures/logo.png" width=250 fig.align="center">
+<img src="https://chrismainey.github.io/Building_funnel_plots_in_R/Assets/logo.png" width=250 fig.align="center">
 ]
 
 ---
@@ -63,8 +64,30 @@ Healthcare Evaluation Data (HED)
 .pull-right[
 <br>
 <img src="https://chrismainey.github.io/EARL_2019_presentation/assets/HED_system.png">
+<img src="https://chrismainey.github.io/EARL_2019_presentation/assets/HED_system.png">
 ]
 
+
+---
+# HED R Training
+
+We offer a variety of R training courses, both public or onsite.
+
+
++ Two day introduction course, public or onsite. __(24th-25th March, 9th-10th June)__
+
++ We also offer other courses, including:
+ + Introduction to R Markdown - __26th Feb__
+ + Machine Learning methods in R __28th - 29th April__
+ + Regression Modelling in R - __22nd - 23rd September__
+ + R Essentials - __20th October__
+
+
+<br>
+Discounted price for HED customers
+
+<br> 
+More info, or book at: https://www.hed.nhs.uk/Info/hed-courses.aspx
 ---
 
 #  Overview 
@@ -353,7 +376,7 @@ funnel_plot(numerator=SHMIdt$OBSERVED, denominator=SHMIdt$EXPECTED, group = SHMI
 We could do it better with a mixed model!
 
 ---
-#  Quick R plug...
+#  Thank you for your time!
 
 .pull-left[
 + `FunnelPlotR` `r knitr::asis_output("\U1F4E6")`
@@ -376,13 +399,6 @@ We could do it better with a mixed model!
  + Rmarkdown
  + Regression modelling
  + Machine Learning in R
-
-
-
----
-#  Thank you for your time! 
-
-+ Questions?
 
 ---
 #  References 
