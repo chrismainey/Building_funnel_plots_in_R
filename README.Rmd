@@ -1,0 +1,20 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Building funnel plots in R
+
+This is a talk about building Funnel Plots and their use in mortality monitoring.
+It showcases my FunnelPlotR package too.
+
+Given at East Midlands NHS-R community meetup on 28/02/2020.
+
