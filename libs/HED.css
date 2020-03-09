@@ -212,7 +212,7 @@ ul, menu, dir {
   background-position: right top;
 
   /*background-size: 10020% 100%; */
-  background-image: url("../Assets/RightBlox2.png");
+  background-image: url("https://chrismainey.github.io/Building_funnel_plots_in_R/Assets/RightBlox2.png");
   display: table-cell;
   font-size: 20px;
   line-height: 1.3;
